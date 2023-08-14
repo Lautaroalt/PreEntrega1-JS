@@ -11,35 +11,41 @@
 
 //alert("Bienvenido/a a nuestra pagina web" + " " + usuario);
 
-let edad= parseInt(prompt("Ingresa tu edad para continuar"));
-    if (edad<18){
-        alert("El consumo de alcohol esta prohibido para jovenes menores de 18 años")  
-        
-    } else{
-        alert("Bienvenido a Bodega Santander!")
-    }
-
-  
-let precioPorBotella = 2000;
-
-const cantidadBotellas = prompt("¿Cuántas botellas de vino deseas comprar?");
-
-
-const cantidadNumerica = parseInt(cantidadBotellas);
-
-
-if (isNaN(cantidadNumerica)) {
-  alert("Por favor, introduce un número válido.");
-} else {
-  
-  const precioTotal = cantidadNumerica * precioPorBotella;
-
-  
-  alert(`Has comprado ${cantidadNumerica} botellas de vino.\nPrecio total: $${precioTotal}`);
+function calcularDescuento(precio, descuento) {
+  if (precio > 100) {
+      let precioConDescuento = precio - (precio * (descuento / 100));
+      return precioConDescuento;
+  } else {
+      return precio;
+  }
 }
 
+function aplicarDescuentos(productos, descuento) {
+  for (let i = 0; i < productos.length; i++) {
+      let precioOriginal = productos[i].precio;
+      let precioConDescuento = calcularDescuento(precioOriginal, descuento);
+      
+      console.log("Producto: " + productos[i].nombre);
+      console.log("Precio original: $" + precioOriginal);
+      console.log("Precio con descuento: $" + precioConDescuento);
+      
+      if (precioConDescuento < 50) {
+          console.log("¡Oferta imperdible!");
+      } else {
+          console.log("¡Aprovecha este descuento!");
+      }
+  }
+}
 
+const listaProductos = [
+  { nombre: "Producto A", precio: 120 },
+  { nombre: "Producto B", precio: 80 },
+  { nombre: "Producto C", precio: 40 }
+];
 
-alert("Compra exitosa, su producto esta siendo preparado. Muchas gracias!")
+const descuentoGlobal = 20;
+
+console.log("Aplicando descuentos a la lista de productos:");
+aplicarDescuentos(listaProductos, descuentoGlobal);
 
 
