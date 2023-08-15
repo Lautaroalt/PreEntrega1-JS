@@ -11,41 +11,64 @@
 
 //alert("Bienvenido/a a nuestra pagina web" + " " + usuario);
 
-function calcularDescuento(precio, descuento) {
-  if (precio > 100) {
-      let precioConDescuento = precio - (precio * (descuento / 100));
-      return precioConDescuento;
+// Definir el precio por botella de vino
+// Definir el precio por botella de vino
+const precioPorBotella = 20;
+
+// Función para calcular el precio total
+function calcularPrecioTotal(cantidad) {
+  return cantidad * precioPorBotella;
+}
+
+// Función para realizar una compra de vino
+function comprarVino() {
+  // Solicitar al usuario la cantidad de botellas de vino que desea comprar
+  const cantidadBotellas = prompt("¿Cuántas botellas de vino deseas comprar?");
+
+  // Convertir la entrada del usuario a un número
+  const cantidadNumerica = parseInt(cantidadBotellas);
+
+  // Verificar si la entrada es un número válido
+  if (isNaN(cantidadNumerica)) {
+    alert("Por favor, introduce un número válido.");
   } else {
-      return precio;
+    // Calcular el precio total
+    const precioTotal = calcularPrecioTotal(cantidadNumerica);
+
+    // Mostrar un mensaje con el detalle de la compra
+    alert(`Has comprado ${cantidadNumerica} botellas de vino.\nPrecio total: $${precioTotal}`);
   }
 }
 
-function aplicarDescuentos(productos, descuento) {
-  for (let i = 0; i < productos.length; i++) {
-      let precioOriginal = productos[i].precio;
-      let precioConDescuento = calcularDescuento(precioOriginal, descuento);
-      
-      console.log("Producto: " + productos[i].nombre);
-      console.log("Precio original: $" + precioOriginal);
-      console.log("Precio con descuento: $" + precioConDescuento);
-      
-      if (precioConDescuento < 50) {
-          console.log("¡Oferta imperdible!");
-      } else {
-          console.log("¡Aprovecha este descuento!");
+// Verificar la edad del usuario
+const edadUsuario = prompt("Por favor, introduce tu edad:");
+const edadNumerica = parseInt(edadUsuario);
+
+if (isNaN(edadNumerica)) {
+  alert("Por favor, introduce una edad válida.");
+} else {
+  if (edadNumerica < 18) {
+    alert("Lo siento, debes ser mayor de 18 años para comprar vino.");
+  } else {
+    // Bucle para permitir al usuario comprar varias veces
+    let deseaComprarMas = true;
+    while (deseaComprarMas) {
+      comprarVino();
+
+      // Preguntar al usuario si desea comprar más
+      const respuesta = prompt("¿Deseas comprar más botellas de vino? (sí/no)").toLowerCase();
+
+      // Evaluar la respuesta del usuario
+      if (respuesta !== "sí") {
+        deseaComprarMas = false;
+        alert("Gracias por tu compra. ¡Hasta luego!");
       }
+    }
   }
 }
 
-const listaProductos = [
-  { nombre: "Producto A", precio: 120 },
-  { nombre: "Producto B", precio: 80 },
-  { nombre: "Producto C", precio: 40 }
-];
 
-const descuentoGlobal = 20;
+    
 
-console.log("Aplicando descuentos a la lista de productos:");
-aplicarDescuentos(listaProductos, descuentoGlobal);
 
 
